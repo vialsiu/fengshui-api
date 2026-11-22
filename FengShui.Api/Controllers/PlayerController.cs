@@ -4,6 +4,9 @@ using FengShui.Api.DTOs;
 
 namespace FengShui.Api.Controllers
 {
+    /// <summary>
+    /// signing up and your own player details
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class PlayerController : ControllerBase
