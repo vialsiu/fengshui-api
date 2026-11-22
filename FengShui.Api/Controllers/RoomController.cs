@@ -5,7 +5,7 @@ using FengShui.Api.DTOs;
 namespace FengShui.Api.Controllers
 {
     /// <summary>
-    /// the game's rooms and the ones players make, plus starting layouts and the bagua map
+    /// the game's rooms and the ones players make, plus the bagua map
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
@@ -37,21 +37,6 @@ namespace FengShui.Api.Controllers
         public ActionResult<RoomDTO> GetRoom(int id)
         {
             //---only the design for now, filled in on feature/rooms
-            return StatusCode(501);
-        }
-
-        /// <summary>
-        /// get the messy starting layout for a room, so a consultation can begin
-        /// </summary>
-        /// <param name="id">room id</param>
-        /// <returns>the starting layout with every piece</returns>
-        /// <response code="200">found it</response>
-        /// <response code="401">no api key sent</response>
-        /// <response code="404">no room with that id, or it has no starting layout</response>
-        [HttpGet("{id}/layouts/start")]
-        public ActionResult<LayoutDTO> GetStartLayout(int id)
-        {
-            //------only the design for now, filled in on feature/layouts
             return StatusCode(501);
         }
 

@@ -1,25 +1,17 @@
-﻿//--------admin only, adding or changing a client
+﻿//---what the admin sends to add or change a client
 namespace FengShui.Api.DTOs;
 
 /// <summary>
-/// what the admin sends to add or change a client
+/// a new client, the birth year is kept so their kua number can be worked out
 /// </summary>
 public class ClientCreateDTO
 {
-    /// <summary>client's name</summary>
+    /// <summary>their name</summary>
     public string? Name { get; set; }
-    /// <summary>client's age</summary>
+    /// <summary>how old they are</summary>
     public int Age { get; set; }
-    /// <summary>what they said</summary>
-    public string? Quote { get; set; }
-    /// <summary>sleep, family, focus or money</summary>
-    public string? Concern { get; set; }
-    /// <summary>what they told the consultant about the room</summary>
-    public string? Notes { get; set; }
-    /// <summary>used for their personal kua rules</summary>
+    /// <summary>year they were born, for the kua number</summary>
     public int BirthYear { get; set; }
-    /// <summary>female or male</summary>
+    /// <summary>male or female, the kua formula is different for each</summary>
     public string? KuaFormula { get; set; }
-    /// <summary>id of the room to fix</summary>
-    public int RoomId { get; set; }
 }
