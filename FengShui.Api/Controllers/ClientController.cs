@@ -1,18 +1,18 @@
-﻿//------the clients and their concerns, players read them, the admin manages them
+﻿//------the clients behind the requests, players read them, the admin manages them
 using Microsoft.AspNetCore.Mvc;
 using FengShui.Api.DTOs;
 
 namespace FengShui.Api.Controllers
 {
     /// <summary>
-    /// the clients and what's bothering them
+    /// the clients, the people who send in requests
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ClientController : ControllerBase
     {
         /// <summary>
-        /// see every client and what's bothering them
+        /// see every client and how many rooms they want fixed
         /// </summary>
         /// <returns>all the client cards</returns>
         /// <response code="200">the list, can be empty</response>
@@ -45,7 +45,7 @@ namespace FengShui.Api.Controllers
         /// <param name="client">the new client</param>
         /// <returns>the client that was made</returns>
         /// <response code="201">client made</response>
-        /// <response code="400">missing name or quote, or the room doesn't exist</response>
+        /// <response code="400">missing name, or the birth year or kua formula isn't valid</response>
         /// <response code="401">no api key sent</response>
         /// <response code="403">not the admin key</response>
         [HttpPost]
@@ -61,7 +61,7 @@ namespace FengShui.Api.Controllers
         /// <param name="id">client id</param>
         /// <param name="client">the new details</param>
         /// <response code="204">changed</response>
-        /// <response code="400">missing name or quote, or the room doesn't exist</response>
+        /// <response code="400">missing name, or the birth year or kua formula isn't valid</response>
         /// <response code="401">no api key sent</response>
         /// <response code="403">not the admin key</response>
         /// <response code="404">no client with that id</response>
@@ -73,7 +73,7 @@ namespace FengShui.Api.Controllers
         }
 
         /// <summary>
-        /// remove a client (admin only)
+        /// remove a client and their requests (admin only)
         /// </summary>
         /// <param name="id">client id</param>
         /// <response code="204">removed</response>
