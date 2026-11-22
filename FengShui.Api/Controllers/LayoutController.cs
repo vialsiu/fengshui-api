@@ -41,14 +41,14 @@ namespace FengShui.Api.Controllers
         }
 
         /// <summary>
-        /// save a new layout for a room
+        /// save a new layout for a request or your own room
         /// </summary>
-        /// <param name="layout">the room, the client if there is one, and every piece</param>
+        /// <param name="layout">the room, the request if there is one, and every piece</param>
         /// <returns>the saved layout</returns>
         /// <response code="201">saved against your player</response>
-        /// <response code="400">two pieces overlap, a piece is outside the room, or a furniture code doesn't exist</response>
+        /// <response code="400">two pieces overlap, a piece is outside the room, a furniture code doesn't exist, or there's more of a piece than the client owns</response>
         /// <response code="401">no api key sent</response>
-        /// <response code="404">the room or client doesn't exist</response>
+        /// <response code="404">the room or request doesn't exist</response>
         [HttpPost]
         public ActionResult<LayoutDTO> PostLayout(LayoutCreateDTO layout)
         {
@@ -62,7 +62,7 @@ namespace FengShui.Api.Controllers
         /// <param name="id">layout id</param>
         /// <param name="layout">the new name and pieces</param>
         /// <response code="204">changed</response>
-        /// <response code="400">two pieces overlap, a piece is outside the room, or a furniture code doesn't exist</response>
+        /// <response code="400">two pieces overlap, a piece is outside the room, a furniture code doesn't exist, or there's more of a piece than the client owns</response>
         /// <response code="401">no api key sent</response>
         /// <response code="403">it's someone else's layout</response>
         /// <response code="404">no layout with that id</response>
@@ -91,12 +91,12 @@ namespace FengShui.Api.Controllers
         /// <summary>
         /// check a layout against the feng shui rules without saving it
         /// </summary>
-        /// <param name="layout">the room, the client if there is one, and every piece</param>
+        /// <param name="layout">the room, the request if there is one, and every piece</param>
         /// <returns>broken rules, kept rules and a harmony score</returns>
         /// <response code="200">checked, harmony is 100 when every rule is followed</response>
-        /// <response code="400">two pieces overlap, a piece is outside the room, or a furniture code doesn't exist</response>
+        /// <response code="400">two pieces overlap, a piece is outside the room, a furniture code doesn't exist, or there's more of a piece than the client owns</response>
         /// <response code="401">no api key sent</response>
-        /// <response code="404">the room or client doesn't exist</response>
+        /// <response code="404">the room or request doesn't exist</response>
         [HttpPost("check")]
         public ActionResult<CheckResultDTO> CheckLayout(LayoutCheckDTO layout)
         {
@@ -110,7 +110,7 @@ namespace FengShui.Api.Controllers
         /// <param name="layout">the room and every piece</param>
         /// <returns>the path qi takes and any squares it never reaches</returns>
         /// <response code="200">worked out, an empty room has no stuck squares</response>
-        /// <response code="400">two pieces overlap, a piece is outside the room, or a furniture code doesn't exist</response>
+        /// <response code="400">two pieces overlap, a piece is outside the room, a furniture code doesn't exist, or there's more of a piece than the client owns</response>
         /// <response code="401">no api key sent</response>
         /// <response code="404">the room doesn't exist</response>
         [HttpPost("qiflow")]
@@ -124,8 +124,8 @@ namespace FengShui.Api.Controllers
         /// get the consultation report for one of your saved layouts
         /// </summary>
         /// <param name="id">layout id</param>
-        /// <returns>the client, what got fixed, what's still broken and the harmony</returns>
-        /// <response code="200">the report, works without a client for your own room too</response>
+        /// <returns>the client and request, what got fixed, what's still broken and the harmony</returns>
+        /// <response code="200">the report, works without a request for your own room too</response>
         /// <response code="401">no api key sent</response>
         /// <response code="403">it's someone else's layout</response>
         /// <response code="404">no layout with that id</response>

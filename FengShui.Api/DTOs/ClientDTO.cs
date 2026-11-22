@@ -1,25 +1,17 @@
-﻿//-----a client card, who they are and what's wrong
+﻿//-------a client card, what they want fixed lives on their requests now
 namespace FengShui.Api.DTOs;
 
 /// <summary>
-/// a client card, who they are and what's bothering them
+/// a client, the person behind one or more requests
 /// </summary>
 public class ClientDTO
 {
     /// <summary>client id</summary>
     public int Id { get; set; }
-    /// <summary>client's name</summary>
+    /// <summary>their name</summary>
     public string? Name { get; set; }
-    /// <summary>client's age</summary>
+    /// <summary>how old they are</summary>
     public int Age { get; set; }
-    /// <summary>what they said, like i can't sleep since i moved in</summary>
-    public string? Quote { get; set; }
-    /// <summary>sleep, family, focus or money</summary>
-    public string? Concern { get; set; }
-    /// <summary>what they told the consultant about the room</summary>
-    public string? Notes { get; set; }
-    /// <summary>id of the room to fix</summary>
-    public int RoomId { get; set; }
-    /// <summary>name of the room to fix</summary>
-    public string? RoomName { get; set; }
+    /// <summary>how many rooms they've asked to have fixed</summary>
+    public int RequestCount { get; set; }
 }
