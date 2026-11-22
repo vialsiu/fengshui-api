@@ -8,16 +8,16 @@ public class Rule
 {
     /// <summary>rule id</summary>
     public int Id { get; set; }
-    /// <summary>short code the checker uses, like bed_sees_door</summary>
+    /// <summary>code the rules engine uses, like coffin</summary>
     public string Code { get; set; } = string.Empty;
-    /// <summary>short title, like the bed can see the door</summary>
+    /// <summary>short title on the card</summary>
     public string Title { get; set; } = string.Empty;
-    /// <summary>the reason behind it, shown when it's broken</summary>
+    /// <summary>the why behind it, shows when the rule is broken</summary>
     public string? Why { get; set; }
-    /// <summary>what part of feng shui it's about</summary>
+    /// <summary>room, general or personal</summary>
     public RuleCategory Category { get; set; }
-    /// <summary>1 to 3, how much harmony is lost when it's broken</summary>
-    public int Severity { get; set; }
+    /// <summary>tip or suggestion, also its weight in the harmony score</summary>
+    public Severity Severity { get; set; }
     /// <summary>the only kind of room it counts for, empty means every room</summary>
     public RoomKind? RoomKind { get; set; }
 }

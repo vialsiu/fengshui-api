@@ -9,9 +9,7 @@ public enum RoomKind
     /// <summary>a bedroom</summary>
     Bedroom,
     /// <summary>a living room</summary>
-    LivingRoom,
-    /// <summary>a home office or study</summary>
-    Office,
-    /// <summary>a kitchen</summary>
-    Kitchen
+    Living,
+    /// <summary>a study or home office</summary>
+    Study
 }

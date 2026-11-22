@@ -1,19 +1,15 @@
-//------groups the rules so the results can be shown by type
+//------groups the rules so the cards can be shown by type
 namespace FengShui.Api.Models;
 
 /// <summary>
-/// what part of feng shui a rule is about
+/// who or what a rule is about
 /// </summary>
 public enum RuleCategory
 {
-    /// <summary>command position, like seeing the door from the bed</summary>
-    Command,
-    /// <summary>qi flow, like nothing blocking the path from the door</summary>
-    Flow,
-    /// <summary>the five elements and how they balance</summary>
-    Elements,
-    /// <summary>the bagua life areas</summary>
-    Bagua,
-    /// <summary>the client's own kua directions</summary>
-    Kua
+    /// <summary>only counts for one kind of room, like the bed seeing the door</summary>
+    Room,
+    /// <summary>counts in every room, like nothing blocking the door</summary>
+    General,
+    /// <summary>depends on the client, like their kua directions</summary>
+    Personal
 }
