@@ -4,6 +4,9 @@ using FengShui.Api.DTOs;
 
 namespace FengShui.Api.Controllers
 {
+    /// <summary>
+    /// the game's rooms and the ones players make, plus starting layouts and the bagua map
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class RoomController : ControllerBase

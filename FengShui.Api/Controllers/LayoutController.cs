@@ -4,6 +4,9 @@ using FengShui.Api.DTOs;
 
 namespace FengShui.Api.Controllers
 {
+    /// <summary>
+    /// saving, checking, qi flow and reports for layouts
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class LayoutController : ControllerBase

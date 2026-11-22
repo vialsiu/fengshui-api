@@ -4,6 +4,9 @@ using FengShui.Api.DTOs;
 
 namespace FengShui.Api.Controllers
 {
+    /// <summary>
+    /// the kinds of furniture you can place
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class FurnitureTypeController : ControllerBase

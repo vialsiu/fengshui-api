@@ -4,6 +4,9 @@ using FengShui.Api.DTOs;
 
 namespace FengShui.Api.Controllers
 {
+    /// <summary>
+    /// the wording of the feng shui rules
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class RuleController : ControllerBase

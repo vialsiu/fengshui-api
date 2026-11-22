@@ -4,6 +4,9 @@ using FengShui.Api.DTOs;
 
 namespace FengShui.Api.Controllers
 {
+    /// <summary>
+    /// kua numbers and lucky directions
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class KuaController : ControllerBase

@@ -4,6 +4,9 @@ using FengShui.Api.DTOs;
 
 namespace FengShui.Api.Controllers
 {
+    /// <summary>
+    /// the clients and what's bothering them
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ClientController : ControllerBase
