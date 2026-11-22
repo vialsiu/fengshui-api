@@ -480,3 +480,8 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# local sqlite database, made by dotnet ef database update
+*.db
+*.db-shm
+*.db-wal
