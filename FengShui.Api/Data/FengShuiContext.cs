@@ -52,6 +52,11 @@ public class FengShuiContext(DbContextOptions<FengShuiContext> options) : DbCont
         //--ref https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding#model-managed-data
         modelBuilder.Entity<FurnitureType>().HasData(FurnitureTypeSeed.All);
         modelBuilder.Entity<Rule>().HasData(RuleSeed.All);
+        //--------rooms, clients, then the requests and inventory that point at them (ef sorts out the insert order itself)
+        modelBuilder.Entity<Room>().HasData(RoomSeed.All);
+        modelBuilder.Entity<Client>().HasData(ClientSeed.All);
+        modelBuilder.Entity<Request>().HasData(RequestSeed.All);
+        modelBuilder.Entity<InventoryItem>().HasData(InventoryItemSeed.All);
     }
 
     /// <summary>
