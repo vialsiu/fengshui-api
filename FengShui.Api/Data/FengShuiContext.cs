@@ -57,6 +57,9 @@ public class FengShuiContext(DbContextOptions<FengShuiContext> options) : DbCont
         modelBuilder.Entity<Client>().HasData(ClientSeed.All);
         modelBuilder.Entity<Request>().HasData(RequestSeed.All);
         modelBuilder.Entity<InventoryItem>().HasData(InventoryItemSeed.All);
+        //---the messy rooms the player starts from
+        modelBuilder.Entity<Layout>().HasData(LayoutSeed.All);
+        modelBuilder.Entity<Placement>().HasData(PlacementSeed.All);
     }
 
     /// <summary>
