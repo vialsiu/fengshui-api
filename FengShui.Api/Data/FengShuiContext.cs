@@ -1,5 +1,6 @@
 ﻿//------the database, one dbset per table
 using Microsoft.EntityFrameworkCore;
+using FengShui.Api.Data.Seed;
 using FengShui.Api.Models;
 
 namespace FengShui.Api.Data;
@@ -37,6 +38,7 @@ public class FengShuiContext(DbContextOptions<FengShuiContext> options) : DbCont
         base.OnModelCreating(modelBuilder);
 
         //---codes and api keys get looked up a lot and can't repeat, so they get a unique index
+        //-----ref https://learn.microsoft.com/en-us/ef/core/modeling/indexes
         modelBuilder.Entity<FurnitureType>().HasIndex(f => f.Code).IsUnique();
         modelBuilder.Entity<Rule>().HasIndex(r => r.Code).IsUnique();
         modelBuilder.Entity<Player>().HasIndex(p => p.ApiKey).IsUnique();
@@ -45,13 +47,26 @@ public class FengShuiContext(DbContextOptions<FengShuiContext> options) : DbCont
         modelBuilder.Entity<InventoryItem>()
             .HasIndex(i => new { i.RequestId, i.FurnitureTypeId })
             .IsUnique();
+
+        //----the game's starting content, the arrays live in the Seed folder
+        //--ref https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding#model-managed-data
+        modelBuilder.Entity<FurnitureType>().HasData(FurnitureTypeSeed.All);
+        modelBuilder.Entity<Rule>().HasData(RuleSeed.All);
+        //--------rooms, clients, then the requests and inventory that point at them (ef sorts out the insert order itself)
+        modelBuilder.Entity<Room>().HasData(RoomSeed.All);
+        modelBuilder.Entity<Client>().HasData(ClientSeed.All);
+        modelBuilder.Entity<Request>().HasData(RequestSeed.All);
+        modelBuilder.Entity<InventoryItem>().HasData(InventoryItemSeed.All);
+        //---the messy rooms the player starts from
+        modelBuilder.Entity<Layout>().HasData(LayoutSeed.All);
+        modelBuilder.Entity<Placement>().HasData(PlacementSeed.All);
     }
 
     /// <summary>
     /// saves every enum as its name instead of a number, so the database is readable
     /// </summary>
     /// <param name="configurationBuilder">used to set the conventions</param>
-    //----ref https://learn.microsoft.com/en-us/ef/core/modeling/bulk-configuration#pre-convention-configuration
+    //------ref https://learn.microsoft.com/en-us/ef/core/modeling/bulk-configuration#pre-convention-configuration
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
         configurationBuilder.Properties<Enum>().HaveConversion<string>();
