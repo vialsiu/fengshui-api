@@ -43,9 +43,9 @@ namespace FengShui.Api.Controllers
             KuaFormula? formula = null;
             if (!string.IsNullOrWhiteSpace(player.KuaFormula))
             {
-                //----TryParse would also accept "1", so IsDefined makes sure it's really female or male
-                if (!Enum.TryParse<KuaFormula>(player.KuaFormula, true, out var parsed) || !Enum.IsDefined(parsed))
-                    return BadRequest("the kua formula has to be female or male");
+                //----EnumText only takes the real names, so "1" can't sneak in as male
+                if (!EnumText.TryParse<KuaFormula>(player.KuaFormula, out var parsed))
+                    return BadRequest($"the kua formula has to be one of: {EnumText.Options<KuaFormula>()}");
                 formula = parsed;
             }
 
