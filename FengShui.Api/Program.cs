@@ -1,4 +1,5 @@
 using FengShui.Api.Data;
+using FengShui.Api.Repositories;
 using Scalar.AspNetCore;
 
 namespace FengShui.Api;
@@ -25,6 +26,17 @@ public class Program
         var connectionString = builder.Configuration.GetConnectionString("FengShui") ?? "Data Source=FengShui.db";
         builder.Services.AddSqlite<FengShuiContext>(connectionString);
 
+        //---one repository per table, controllers ask for the interface and get the ef version
+        //------scoped = a new one for every request, the same lifetime as the context they use
+        //----ref https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection/service-lifetimes
+        builder.Services.AddScoped<IFurnitureTypeRepository, EfFurnitureTypeRepository>();
+        builder.Services.AddScoped<IRuleRepository, EfRuleRepository>();
+        builder.Services.AddScoped<IRoomRepository, EfRoomRepository>();
+        builder.Services.AddScoped<IClientRepository, EfClientRepository>();
+        builder.Services.AddScoped<IRequestRepository, EfRequestRepository>();
+        builder.Services.AddScoped<ILayoutRepository, EfLayoutRepository>();
+        builder.Services.AddScoped<IPlayerRepository, EfPlayerRepository>();
+
         var app = builder.Build();
 
         //----only show the api docs while developing
@@ -50,3 +62,4 @@ public class Program
         app.Run();
     }
 }
+
