@@ -1,5 +1,7 @@
+using FengShui.Api.Auth;
 using FengShui.Api.Data;
 using FengShui.Api.Repositories;
+using Microsoft.AspNetCore.Authentication;
 using Scalar.AspNetCore;
 
 namespace FengShui.Api;
@@ -37,6 +39,11 @@ public class Program
         builder.Services.AddScoped<ILayoutRepository, EfLayoutRepository>();
         builder.Services.AddScoped<IPlayerRepository, EfPlayerRepository>();
 
+        //--------api key login, the handler reads the X-Api-Key header on every request
+        builder.Services.AddAuthentication(ApiKeyDefaults.SchemeName)
+            .AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>(ApiKeyDefaults.SchemeName, null);
+        builder.Services.AddAuthorization();
+
         var app = builder.Build();
 
         //----only show the api docs while developing
@@ -55,6 +62,8 @@ public class Program
 
         app.UseHttpsRedirection();
 
+        //---who is it first, then what are they allowed to do
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllers();
@@ -62,4 +71,3 @@ public class Program
         app.Run();
     }
 }
-
