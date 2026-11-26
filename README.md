@@ -1,7 +1,7 @@
-﻿# fengshui – API
+﻿# Feng Shui Interior Design API
 
-A feng shui room-fixing game. You work as an interior designer. The player is a feng shui consultant: each client has a
-problem and a room with bad feng shui. The player moves, rotates and removes furniture until the room follows the rules.
+This is a feng shui room-fixing game. You work as an interior design consultant, solving issues for clients and getting paid for your generous help. 
+Move, rotate, add and remove furniture until the room follows the rules of feng shui to satisfy the client.
 
 ## How to run
 - .NET 10 SDK
@@ -9,4 +9,6 @@ problem and a room with bad feng shui. The player moves, rotates and removes fur
 - `dotnet test`
 
 ## References
-empty for now.
+- [Service lifetimes (Microsoft)](https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection/service-lifetimes)
+- [Eager Loading of Related Data (Microsoft)](https://learn.microsoft.com/en-us/ef/core/querying/related-data/eager)
+
