@@ -16,6 +16,13 @@ public interface IFurnitureTypeRepository : IRepository<FurnitureType>
     Task<FurnitureType?> GetByCodeAsync(string code);
 
     /// <summary>
+    /// true if any layout or client inventory uses this furniture type
+    /// </summary>
+    /// <param name="id">furniture type id</param>
+    /// <returns>whether it's in use</returns>
+    Task<bool> IsInUseAsync(int id);
+    
+    /// <summary>
     /// -- every furniture type whose code is in the list, used when a whole layout comes in
     /// </summary>
     /// <param name="codes">the codes</param>
