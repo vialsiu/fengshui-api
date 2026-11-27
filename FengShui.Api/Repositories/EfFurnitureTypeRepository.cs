@@ -25,6 +25,14 @@ public class EfFurnitureTypeRepository(FengShuiContext context)
     }
 
     /// <inheritdoc />
+    public async Task<bool> IsInUseAsync(int id)
+    {
+        //----deleting a type that's placed somewhere would wipe those pieces out of people's layouts
+        return await Context.Placements.AnyAsync(p => p.FurnitureTypeId == id)
+               || await Context.InventoryItems.AnyAsync(i => i.FurnitureTypeId == id);
+    }
+    
+    /// <inheritdoc />
     public async Task<Dictionary<string, FurnitureType>> GetByCodesAsync(IEnumerable<string> codes)
     {
         //---distinct first, a layout with 2 beds only needs to look up "bed" once
