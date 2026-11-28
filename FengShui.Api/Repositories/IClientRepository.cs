@@ -20,4 +20,10 @@ public interface IClientRepository : IRepository<Client>
     /// <param name="id">client id</param>
     /// <returns>the client, or null if there isn't one</returns>
     Task<Client?> GetWithRequestsAsync(int id);
+
+    /// <summary>
+    ///-- deletes a client with their requests, inventories and every layout made for those requests
+    /// </summary>
+    /// <param name="client">the client to delete</param>
+    Task DeleteWithRequestsAsync(Client client);
 }
