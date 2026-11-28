@@ -43,4 +43,42 @@ public class EfRequestRepository(FengShuiContext context)
             .ThenInclude(p => p.FurnitureType)
             .FirstOrDefaultAsync(l => l.RequestId == requestId && l.Kind == LayoutKind.Start);
     }
+    
+    /// <inheritdoc />
+    public async Task UpdateWithInventoryAsync(Request request, List<InventoryItem> inventory)
+    {
+        //------all or nothing, an inventory should never end up half replaced
+        //----ref https://learn.microsoft.com/en-us/ef/core/saving/transactions
+        await using var transaction = await Context.Database.BeginTransactionAsync();
+
+        //---old lines go first, the unique index on request + furniture would clash with the new ones
+        await Context.InventoryItems
+            .Where(i => i.RequestId == request.Id)
+            .ExecuteDeleteAsync();
+
+        foreach (var item in inventory)
+            item.RequestId = request.Id;
+        Context.InventoryItems.AddRange(inventory);
+
+        //--------the request is tracked, so its changed details save without calling Update
+        await Context.SaveChangesAsync();
+        await transaction.CommitAsync();
+    }
+
+    /// <inheritdoc />
+    public async Task DeleteWithLayoutsAsync(Request request)
+    {
+        //-----layouts point at the request but don't cascade, same problem as deleting a client
+        await using var transaction = await Context.Database.BeginTransactionAsync();
+
+        await Context.Layouts
+            .Where(l => l.RequestId == request.Id)
+            .ExecuteDeleteAsync();
+
+        //---inventory items cascade from the request
+        Set.Remove(request);
+        await Context.SaveChangesAsync();
+
+        await transaction.CommitAsync();
+    }
 }
